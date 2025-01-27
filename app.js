@@ -3,6 +3,7 @@
 let lista = [];
 
 // Funciones
+// Agrega un nombre a la lista
 function agregarAmigo() {
     //Obtiene el valor (nombre) del imput
     let nombre = document.getElementById('amigo').value;
@@ -18,14 +19,26 @@ function agregarAmigo() {
         //console.log(lista);
         enlistarAmigos();
     }
+    // Borra el contenido del input
     document.getElementById('amigo').value = '';
 }
 
+// Actualiza la lista de nombres agregados
 function enlistarAmigos () {
-    console.log('impresion de enlistar:' + lista)
+    let listaAmigos = document.getElementById('listaAmigos');
+    listaAmigos.innerHTML = '';
+
+    // Ciclo para alimentar la nueva lista de nombres agregados
+    for (let i = 0; i < lista.length; i++){
+        let li = document.createElement('li');
+        li.textContent = lista[i];
+        listaAmigos.appendChild(li);
+    }
 }
 
+// Realiza el sorteo de los nombres para crear los pares de amigos secretos.
 function sortearAmigo(){
+
     console.log("Sorteando amigo")
 }
 
