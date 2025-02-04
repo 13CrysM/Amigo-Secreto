@@ -43,29 +43,32 @@ function sortearAmigo(){
         alert('Debes de agregar por lo menos dos nombres.');
         return;
     }
-    let resultado = document.getElementById ('resultado');
+
+    let amigos = [...lista];
+    console.log(amigos)
+    let resultado = document.getElementById('resultado');
     resultado.innerHTML = '';
-    let copiaLista; 
-    // Ciclo para evitar que se empareje con la misma persona. 
-    do {
-        //creamos una copia de la lista para no alterar la original.
-        copiaLista = [...lista];
-        copiaLista.sort(() => Math.random() - 0.5);
-        console.log("copia lista: " + copiaLista)
-    } while (copiaLista.some((amigo, index) => amigo === lista[index]));
-    
-    // Ciclo para crear los emparejamientos
+
+    let sorteo = [];
+    while (amigos.length > 0) {
+        let indexAmigo = Math.floor(Math.random() * amigos.length);
+        console.log(indexAmigo)
+        let amigo = amigos.splice(indexAmigo, 1)[0];
+        console.log(amigo)
+
+        if (sorteo.length === lista.length - 1 && lista[lista.length - 1] === amigo) {
+            // Caso especial: Si queda solo un amigo en la lista y es el mismo, hacemos un intercambio
+            let intercambio = sorteo[sorteo.length - 1];
+            sorteo[sorteo.length - 1] = amigo;
+            amigo = intercambio;
+        }
+
+        sorteo.push(amigo);
+    }
+
     for (let i = 0; i < lista.length; i++) {
-        let receptor;
-
-        // Asegurarse de que el receptor no sea el mismo que el emisor
-        do {
-            receptor = copiaLista[(i + 1) % copiaLista.length];
-        } while (receptor === lista[i]); // Asegurarse de que el receptor no sea el mismo que el emisor
-
-        // Asignacion de amigos secretos
         let li = document.createElement('li');
-        li.textContent = `${lista[i]} -> ${receptor}`;
+        li.textContent = `${lista[i]} ➡️ ${sorteo[i]}`;
         resultado.appendChild(li);
     }
 
