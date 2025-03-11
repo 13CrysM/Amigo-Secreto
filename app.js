@@ -48,18 +48,6 @@ function sortearAmigo(){
     let copiaLista; 
     let intentos = 0; // Añadimos un contador de intentos
 
-    // Ciclo para evitar que se empareje con la misma persona.
-    /*do {
-        // Creamos una copia de la lista para no alterar la original.
-        copiaLista = [...lista];
-        copiaLista.sort(() => Math.random() - 0.5);
-        intentos++; // Incrementamos el contador
-        if (intentos > 1000) { // Si supera los 1000 intentos, salimos del bucle
-            alert('No se pudo generar una lista válida después de muchos intentos. Inténtalo de nuevo.');
-            return;
-        console.log(intentos);
-        }
-    } while (copiaLista.some((amigo, index) => amigo === lista[index]));*/
     
     // Ciclo para crear los emparejamientos
     for (let i = 0; i < lista.length; i++) {
@@ -80,6 +68,7 @@ function sortearAmigo(){
 
     console.log("Sorteando amigo");
 }
+
 function reiniciar() {
     // Borrar la lista de amigos
     lista = [];
